@@ -56,8 +56,8 @@ span.arrow {font:13px 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-seri
 
 /* =Headings
 --------------------------------------------------------------------------------------------------------*/
-h1#logo { position:relative; float:left; margin:35px; width:100px; height:56px; z-index:1 }
-h1#logo a { display:block; background:url(../img/bg-logo.png) no-repeat; background-size:100px 56px; width:100px; height:56px; text-indent:-9999px; }
+h1#logo { position:relative; float:left; margin:5px; width:165px; height:110px; z-index:1 }
+h1#logo a { display:block; background:url(../img/bg-logo.png) no-repeat; background-size:165px 110px; width:165px; height:110px; text-indent:-9999px; }
 h2, h3, h4, h2 a, h3 a, h4 a { line-height:1; font-weight:700; color:#2b2b2b; display:block font-family:'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif; text-transform:uppercase }
 h2 a:hover, h3 a:hover, h4 a:hover { color:#2b2b2b; }
 h2 { font-size:48px; padding-bottom:9px; padding-top:16px; letter-spacing:-1px; }
