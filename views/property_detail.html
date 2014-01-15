@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <!-- Set the viewport width to device width for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="author" content="ppandp">
-<meta name="Description" content="FULLSCREEN – Photography Portfolio HTML5" />
-<title>FULLSCREEN – Photography Portfolio HTML5</title>
+<meta name="author" content="Miranium">
+<meta name="Description" content="{{description}}" />
+<title>{{property.headline}} - ${{property.list_price|number_format}} - {{property.district}} - MLS ID {{property.mls_id}} - OceanFront Maui Real Estate</title>
 <link href="{{assets_css}}reset.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="{{assets_css}}contact.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="{{assets_css}}styles.css" rel="stylesheet" type="text/css" media="screen" />
@@ -30,34 +30,23 @@
   </div>
   <header id="wrapper">
     <div class="container clearfix">
-      <h1 id="logo"><a href="index.html">MY FOLIO</a></h1>
+      <h1 id="logo"><a href="/">{{title}}</a></h1>
       <!-- start navi -->
       <div id="nav-button"> <span class="nav-bar"></span> <span class="nav-bar"></span> <span class="nav-bar"></span> </div>
       <div id="options" class="clearfix">
-        <ul id="main-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#" class="dead-link current">Portfolio</a>
-            <ul class="other">
-              <li><a href="slideshow.html">Slideshow</a></li>
-              <li><a href="masonry.html">Masonry Grid</a></li>
-              <li><a href="slider.html" class="current">Slider</a></li>
-              <li><a href="classic.html">Classic</a></li>
-            </ul>
-          </li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+        {% include 'includes/main_menu.html' %}
       </div>
       <!-- end nav -->
     </div>
-    <div class="more-info clearfix"><a href="#"><span class="arrow">←</span> Prev</a><a href="#">Next <span class="arrow">→</span></a></div>
+    <!--
+      <div class="more-info clearfix"><a href="#"><span class="arrow">←</span> Prev</a><a href="#">Next <span class="arrow">→</span></a></div>
+    -->
   </header>
   <!-- end header -->
   <div id="content">
     <div class="container clearfix">
       <div id="container">
-        <div class="combi clearfix element home col1-1 height-400">
+        <div class="combi clearfix element all col1-1 height-400">
           <div class="col2-3">
             <div class="flexslider">
               <div class="images">
@@ -80,10 +69,12 @@
           </div>
           <div class="col1-3 white-right">
             <h3>{{property.headline}}</h3>
-            <h5>{{property.district}}</h5>
+            <h5>{{property.district}} - {{property.type}}</h5>
             <h4>${{property.list_price|number_format}}</h4>
-            <h6>{{property.type}}</h6>
-            <p></p>
+            <p>{% if property.summary.0 %}
+                  {{property.summary.0}}
+                {% endif %}
+            </p>
             <div class="bottom-field clearfix">
               <p class="small">
                 <span class="alignleft">Status: {{property.status_category}}</span> 
@@ -94,8 +85,10 @@
           <div class="clear"></div>
         </div>
 
-        <div class="col1-3 tab-tile element home">
-          <!--<div class="tabs"><a href="#" class="clearfix"><div class="icons zoom"></div><span>Open in Lightbox</span></a></div>-->
+        <!--
+
+        <div class="col1-3 tab-tile element all">
+
           <div class="tabs"><a href="#" class="clearfix">
             <div class="icons facebook"></div>
             <span>Share Project</span></a></div>
@@ -110,110 +103,26 @@
             <span>Download PDF File</span></a></div>
         </div>
 
-        {% if property.photos.2.url %}
-
-        <div class="element col1-3 home"> <a href="{{property.photos.2.url}}" title="" data-fancybox-group="group1" class="popup">
-          <div class="images"><img src="{{property.photos.2.url}}" alt="" />
-            <div class="title">
-              <div class="title-wrap">
-                <h3><span>Bedrooms: {{property.beds}}</span> </h3>
-              </div>
-            </div>
-            <div class="subtitle">
-              <div class="subtitle-wrap">
-                <p> <span>Bathrooms: {{property.baths}}</span> </p>
-              </div>
-            </div>
-          </div>
-          </a>
-        </div>
-
-       {% endif %}
-
-       {% if property.photos.4.url %}
-
-        <div class="element col1-3 home"> <a href="{{property.photos.4.url}}" title="" data-fancybox-group="group1" class="popup">
-          <div class="images"><img src="{{property.photos.4.url}}" alt="" />
-            <div class="title">
-              <div class="title-wrap">
-                <h3><span>Living Area: {{property.living_area_sf|number_format(0, '.', ',')}} sqft</span> </h3>
-              </div>
-            </div>
-            <div class="subtitle">
-              <div class="subtitle-wrap">
-                <p> <span>${{ (property.list_price / property.living_area_sf)|number_format(2, '.', ',') }} / sqft</span> </p>
-              </div>
-            </div>
-          </div>
-          </a>
-        </div>
-
-       {% endif %}
-
-
-        {% if property.public_remarks %}
-
-        <div class="col1-3 white grey-area-last element home">
-          <p class="blockquote">“ {{property.public_remarks}} ”</p>
-          <div class="grey-area last smaller clearfix">
-            <p class="small"><span class="alignleft">{{property.la1_agent_first_name}} {{property.la1_agent_last_name}}</span> <span class="alignright"><a href="#">{{property.lo1_office_name}}</a></span></p>
-          </div>
-        </div>
-
-        {% endif %}
-
-
-        {% if property.photos.6.url %}
-
-        <div class="element col1-3 home"> <a href="{{property.photos.6.url}}" title="" data-fancybox-group="group1" class="popup">
-          <div class="images"><img src="{{property.photos.6.url}}" alt="" />
-            <div class="title">
-              <div class="title-wrap">
-                <h3><span>Land: {{property.land_acres}} acres</span> </h3>
-              </div>
-            </div>
-            <div class="subtitle">
-              <div class="subtitle-wrap">
-                <p> <span>${{ (property.list_price / property.land_acres)|number_format(2, '.', ',') }} / Acre</span> </p>
-              </div>
-            </div>
-          </div>
-          </a> </div>
-
-        {% endif %}
-
-
-        {% if property.photos.8.url %}
-
-        <div class="element col1-3 home"> <a href="{{property.photos.8.url}}" title="" data-fancybox-group="group1" class="popup">
-          <div class="images"><img src="{{property.photos.8.url}}" alt="" />
-            <div class="title">
-              <div class="title-wrap">
-                <h3><span>${{property.list_price|number_format}}</span> </h3>
-              </div>
-            </div>
-            <div class="subtitle">
-              <div class="subtitle-wrap">
-                <p> <span>{{property.lt}}</span> </p>
-              </div>
-            </div>
-          </div>
-          </a>
-        </div>
-
-        {% endif %}
+        -->
 
 
         {% if property.beds %}
 
-        <div class="col1-3 tab-tile element home">
+        <div class="col1-3 tab-tile element all">
 
           <div class="tabs">
             <a href="#" class="clearfix">
-              <span><strong>Main House</strong></span>
+              <span>
+                {% if property.property_type == 'RES' %}
+                  <strong> Main House </strong>
+                {% else %}
+                  <strong> Condo </strong> at {{ property.building_name }} 
+                {% endif %}
+              </span>
             </a>
           </div>
 
+      
           <div class="tabs">
             <a href="#" class="clearfix">
               <span>{{property.beds}} <strong>Beds</strong> | {{property.baths}} <strong>Baths</strong></span>
@@ -230,15 +139,47 @@
 
           {% endif %}
 
-
           {% if property.land_acres %}
 
           <div class="tabs">
-            <a href="#" class="clearfix">
-              <span>{{property.land_acres}} <strong>Acres</strong> | ${{ (property.list_price / property.land_acres)|number_format(2, '.', ',') }} / Acre</strong> </span>
+             <a href="#" class="clearfix">
+              <span>
+            {% if property.property_type == 'RES' %}
+
+              {{property.land_acres}} <strong>Acres</strong> | ${{ (property.list_price / property.land_acres)|number_format(2, '.', ',') }} / Acre</strong> 
+
+            {% else %}
+
+              {{property.land_acres}} <strong>Acres</strong> in complex
+            
+            {% endif %}
+
+              </span>
             </a>
           </div>
 
+          {% endif %}
+
+          {% if property.property_type == 'CON' %}
+          <div class="tabs">
+             <a href="#" class="clearfix">
+              <span>
+                 <strong>Unit</strong> {{property.unit}} on <strong>Floor</strong> {{property.floor_level}}
+              </span>
+            </a>
+          </div>
+          {% endif %}
+
+
+          {% if property.monthly_maintenance_fee %}
+
+          <div class="tabs">
+             <a href="#" class="clearfix">
+              <span>
+                  <strong>Maintenance Fee</strong> ${{property.monthly_maintenance_fee}} / month
+              </span>
+            </a>
+          </div>
           {% endif %}
 
 
@@ -264,12 +205,150 @@
           {% endif %}
 
         </div>
-       {% endif %}   
+       {% endif %}
+
+
+       {% if property.photos.2.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.2.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.2.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+                <h3><span>
+                {% if property.property_type == 'LND' %}
+                    Land Area: {{property.land_acres}} acres
+                {% else %}
+                     Bedrooms: {{property.beds}}
+                {% endif %}
+                </span> </h3>
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+                <p><span>
+                {% if property.property_type == 'LND' %}
+                    ${{ (property.list_price / property.land_acres)|number_format(2, '.', ',') }} / Acre
+                {% else %}
+                     Bathrooms: {{property.baths}}
+                {% endif %}
+                </span> </p>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+
+       {% endif %}
+
+       {% if property.photos.4.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.4.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.4.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+                <h3><span>
+                {% if property.property_type == 'LND' %}
+                    Land Area: {{property.land_sqft|number_format(0, '.', ',')}} sqft
+                {% else %}
+                     Living Area: {{property.living_area_sf|number_format(0, '.', ',')}} sqft
+                {% endif %}
+                </span> </h3>
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+                <p> <span>
+                {% if property.property_type == 'LND' %}
+                    ${{ (property.list_price / property.land_sqft)|number_format(2, '.', ',') }} / sqft
+                {% else %}
+                     ${{ (property.list_price / property.living_area_sf)|number_format(2, '.', ',') }} / sqft
+                {% endif %}                  
+                </span> </p>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+
+       {% endif %}
+
+      {% if property.summary.1 %}
+
+        <div class="col1-3 white element all">
+          <p class="blockquote">"{{property.summary.1}}"</p>
+        </div>
+
+      {% endif %}
+
+
+       {% if property.photos.6.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.6.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.6.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+                
+                {% if property.property_type == 'RES' %}
+                <h3><span>
+                    Land Area: {{property.land_acres}} acres
+                </span> </h3>
+                {% elseif property.property_type == 'CON' %}
+                <h3><span>
+                    Complex Land Area: {{property.land_acres}} acres
+                </span> </h3>
+                {% endif %}  
+
+
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+                {% if property.property_type == 'RES' %}
+                <p> <span>
+                    ${{ (property.list_price / property.land_acres)|number_format(2, '.', ',') }} / Acre
+                  </span> </p>
+                {% endif %}  
+              </div>
+            </div>
+          </div>
+          </a> </div>
+
+        {% endif %}
+
+
+        {% if property.photos.8.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.8.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.8.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+                <h3><span>${{property.list_price|number_format}}</span> </h3>
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+                <p> <span>{{property.lt}}</span> </p>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+
+        {% endif %}
+
+        {% if property.summary.3 %}
+
+        <div class="col1-3 white element all">
+          <p class="blockquote">"{{property.summary.3}}"</p>
+        </div>
+
+      {% endif %}
+
 
 
         {% if property.ohana_beds %}
 
-        <div class="col1-3 tab-tile element home">
+        <div class="col1-3 tab-tile element all">
 
           <div class="tabs">
             <a href="#" class="clearfix">
@@ -320,7 +399,7 @@
 
         {% if property.photos.10.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.10.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.10.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.10.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -338,10 +417,9 @@
 
         {% endif %}
 
-
         {% if property.photos.12.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.12.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.12.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.12.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -359,9 +437,10 @@
 
 
 
+
         {% if property.photos.14.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.14.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.14.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.14.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -377,9 +456,17 @@
 
         {% endif %}        
 
+       {% if property.pool == 'Yes' %}
+
+        <div class="col1-3 white element all">
+          <p class="blockquote">“Yes, there is a swimming pool!”</p>
+
+        </div>
+
+        {% endif %}
         {% if property.photos.16.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.16.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.16.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.16.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -396,42 +483,18 @@
         {% endif %}
 
 
-        {% if property.pool %}
+        {% if property.summary.2 %}
 
-        <div class="col1-3 white grey-area-last element home">
-          <p class="blockquote">“ Yes, there is a swimming pool! ”</p>
-          <div class="grey-area last smaller clearfix">
+          <div class="col1-3 white element all">
+            <p class="blockquote">"{{property.summary.2}}"</p>
           </div>
-        </div>
-
-        {% endif %}
-
-
-        {% if property.waterfront == 'OceanFront' %}
-
-        <div class="col1-3 white grey-area-last element home">
-          <p class="blockquote">“ This property is right on the ocean. ”</p>
-          <div class="grey-area last smaller clearfix">
-          </div>
-        </div>
-
-        {% endif %}
-
-
-        {% if property.waterfront == 'BeachFront' %}
-
-        <div class="col1-3 white grey-area-last element home">
-          <p class="blockquote">“ This property is right on the beach. ”</p>
-          <div class="grey-area last smaller clearfix">
-          </div>
-        </div>
 
         {% endif %}
 
 
         {% if property.photos.18.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.18.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.18.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.18.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -447,9 +510,17 @@
 
         {% endif %}
 
+        {% if property.waterfront == 'BeachFront' %}
+
+        <div class="col1-3 white element all">
+          <p class="blockquote">“This property is right on the beach.”</p>
+        </div>
+
+        {% endif %}
+
         {% if property.photos.20.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.20.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.20.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.20.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -465,9 +536,10 @@
 
         {% endif %}
 
+
         {% if property.photos.1.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.1.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.1.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.1.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -484,9 +556,21 @@
         {% endif %}
 
 
+        {% if property.public_remarks %}
+
+        <div class="col1-3 white grey-area-last element all">
+          <p>{{property.public_remarks}}</p>
+          <div class="grey-area last smaller clearfix">
+            <p class="small"><span class="alignleft">{{property.la1_agent_first_name}} {{property.la1_agent_last_name}}</span> <span class="alignright"><a href="#">{{property.lo1_office_name}}</a></span></p>
+          </div>
+        </div>
+
+        {% endif %}
+
+
         {% if property.photos.3.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.3.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.3.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.3.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -502,9 +586,17 @@
 
         {% endif %}
 
+      {% if property.summary.4 %}
+
+        <div class="col1-3 white element all">
+          <p class="blockquote">"{{property.summary.4}}"</p>
+        </div>
+
+      {% endif %}
+
         {% if property.photos.5.url %}
 
-        <div class="element col1-3 home"> <a href="{{property.photos.5.url}}" title="" data-fancybox-group="group1" class="popup">
+        <div class="element col1-3 all"> <a href="{{property.photos.5.url}}" title="" data-fancybox-group="group1" class="popup">
           <div class="images"><img src="{{property.photos.5.url}}" alt="" />
             <div class="title">
               <div class="title-wrap">
@@ -519,6 +611,60 @@
         </div>
 
         {% endif %}
+
+
+        {% if property.photos.7.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.7.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.7.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+
+        {% endif %}
+
+        {% if property.photos.9.url %}
+
+        <div class="element col1-3 all"> <a href="{{property.photos.9.url}}" title="" data-fancybox-group="group1" class="popup">
+          <div class="images"><img src="{{property.photos.9.url}}" alt="" />
+            <div class="title">
+              <div class="title-wrap">
+              </div>
+            </div>
+            <div class="subtitle">
+              <div class="subtitle-wrap">
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+
+        {% endif %}
+
+
+     <!--
+
+        <div class="col1-3 white element all">
+          <p>
+            <ul>
+              {% for summary in property.summary %}
+                <li>---- {{summary}}</li>
+              {% endfor %}
+            </ul> 
+
+          </p>
+        </div>
+
+      -->
+
 
       </div>
     </div>

@@ -9,7 +9,7 @@ var $container = $('#container'),
           isotopeOptions = {},
           // defaults, used if not explicitly set in hash
           defaultOptions = {
-            filter: '.home',
+            filter: '.all',
             sortBy: 'original-order',
             sortAscending: true,
             layoutMode: 'masonry'
@@ -106,7 +106,7 @@ var $container = $('#container'),
           isotopeOptions = {},
           // defaults, used if not explicitly set in hash
           defaultOptions = {
-            filter: '.home',
+            filter: '.all',
             sortBy: 'original-order',
             sortAscending: true,
             layoutMode: 'masonry'
